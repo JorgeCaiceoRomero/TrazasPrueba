@@ -6,12 +6,21 @@ import modelo.Paciente;
 import modelo.Persona;
 import modelo.Vacunable;
 import modelo.PersonaInforme;
+
+import java.net.URL;
 import java.util.ArrayList;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 import controlador.DAOPersona;
 
 
 public class Main {
+	
+	public static Logger logger = LogManager.getLogger(Main.class);
+	
 	
 	static DAOPersona dp = new DAOPersona();
 	static ArrayList<Persona> personas = dp.buscarTodasPersonas();
@@ -19,18 +28,23 @@ public class Main {
 	static ArrayList<Infectable> pacientes = new ArrayList<Infectable>();
 	
 	public static void main(String[] args) {
-		
+		ClassLoader loader = Thread.currentThread().getContextClassLoader();
+		String url = "C:\\Users\\Jorge Curso\\Desktop\\LogPrueba\\PruebaSerbatic\\src\\resource\\log4j.properties";
+		PropertyConfigurator.configure(url);
 
+		logger.info("Se ha iniciado el programa");
 		for(Persona p:personas) {
 			if (p instanceof Paciente) {
-				//System.out.println("Se ha añadido un paciente");
-				
+				//System.out.println("Se ha añadido un paciente");				
 				pacientes.add((Infectable) p);
+				logger.info("Se ha añadido un paciente a su lista");
 			}
 			else {
 				if(p instanceof Vacunable) {
 					//System.out.println("Se ha añadido un VACUNABLE");
 					enfermeros.add((Vacunable) p);
+					logger.info("Se ha añadido una enfermera a su lista");
+					
 				}
 			}
 		}
@@ -47,6 +61,7 @@ public class Main {
 		//imprimeListaInforme(informe);
 		HiloInsertar h1 = new HiloInsertar(informe);
 		h1.start();
+		logger.warn("Se ha abierto un hilo");
 		
 	}
 	

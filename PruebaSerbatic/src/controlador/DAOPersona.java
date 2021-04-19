@@ -28,13 +28,13 @@ public class DAOPersona extends Conexion{
 	 public ArrayList<Persona> buscarPersonas(int idCiudad) {
 		 	ArrayList<Persona> personas = new ArrayList<Persona>();
 		 	Persona p;
-	        DataSource ds = setUpPool();
+	       // DataSource ds = setUpPool();
 	        printDbStatus();
 	        try {
 
-	            if (getConnectionPool().getMaxActive() <= 5) {
+	         /*   if (getConnectionPool().getMaxActive() <= 5) {
 	                c = ds.getConnection();
-	            }
+	            }*/
 
 	            pstm =  c.prepareStatement("Select * from personas where id_ciudad="+idCiudad);
 
@@ -70,13 +70,13 @@ public class DAOPersona extends Conexion{
 	 public ArrayList<Persona> buscarTodasPersonas() {
 		 	ArrayList<Persona> personas = new ArrayList<Persona>();
 		 	Persona p;
-	        DataSource ds = setUpPool();
+	        //DataSource ds = setUpPool();
 	        printDbStatus();
 	        try {
 
-	            if (getConnectionPool().getMaxActive() <= 5) {
+	          /*  if (getConnectionPool().getMaxActive() <= 5) {
 	                c = ds.getConnection();
-	            }
+	            }*/
 
 	            pstm =  c.prepareStatement("Select * from personas");
 
@@ -109,13 +109,13 @@ public class DAOPersona extends Conexion{
 	 
 	 public synchronized void insertarInforme(ArrayList<PersonaInforme> informe) {
 
-	        DataSource dataSource = setUpPool();
+	       // DataSource dataSource = setUpPool();
 	        printDbStatus();
 	        try {
 
-	            if (getConnectionPool().getMaxActive() <= 5) {
+	         /*   if (getConnectionPool().getMaxActive() <= 5) {
 	                c = dataSource.getConnection();
-	            }
+	            }*/
 
 	            pstm = c.prepareStatement("INSERT INTO personas_informe  VALUES (?,?, ?, ?, ?)");
 
